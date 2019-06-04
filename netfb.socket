@@ -1,0 +1,9 @@
+[Unit]
+Description=netfb socket
+
+[Socket]
+ListenStream=11235
+Accept=yes
+
+[Install]
+WantedBy=sockets.target

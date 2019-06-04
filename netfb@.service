@@ -1,0 +1,12 @@
+[Unit]
+Description=netfb
+
+[Service]
+# The leading hyphen is important: it instructs systemd to ignore the exit
+# status of this instantiated service.
+#
+# The use of /bin/bash to run fbshow (despite the latter's shebang line) is
+# because systemd balks at the %h homedir interpolation in a leading position. 🙄
+ExecStart=-/bin/bash %h/bin/fbshow
+StandardInput=socket
+StandardOutput=socket
