@@ -26,8 +26,7 @@ ready and waiting on port 11235, which you may oblige by issuing:
 
 Note well that you will need to issue these from a real terminal outside of a
 graphical session (Shift-Alt-F1 on Linux), otherwise netfb will not be able to
-meaningfully engage the framebuffer.  You yourself must also be a member of the
-_video_ group in order to be allowed direct access the framebuffer.
+meaningfully engage the framebuffer.
 
 A word of warning: take care to only allow your closest friends and family to
 talk to netfb, as it is but a simple service and bound to be gullible and
