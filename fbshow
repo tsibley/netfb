@@ -24,6 +24,7 @@ generate-tga() {
         <(convert-input) \
         <(generate-background) \
         tga:"$tga"
+    report "🖼 done in ${SECONDS}s"
 }
 
 blit-tga-to-framebuffer() {
@@ -39,16 +40,22 @@ blit-tga-to-framebuffer() {
 }
 
 convert-input() {
+    report " 📐 Resizing and rotating image"
+
     # XXX TODO: explain -flip!
     convert - \
         -auto-orient \
         -geometry "$SCREEN_GEOMETRY>" \
         -flip \
         png:-
+
+    report " 📐 done in ${SECONDS}s"
 }
 
 generate-background() {
+    report " 🖾 Measuring and cutting a $BACKGROUND_COLOR matte"
     convert -size "$SCREEN_GEOMETRY" canvas:"$BACKGROUND_COLOR" png:-
+    report " 🖾 done in ${SECONDS}s"
 }
 
 report() {
