@@ -5,12 +5,14 @@ set -euo pipefail
 : ${BACKGROUND_COLOR:=black}
 
 main() {
+    local fb="${1:-/dev/fb0}"
+
     # It's much faster to write the image to disk between steps.
     tga="$(mktemp)"
     trap 'rm "$tga"' EXIT
 
     generate-tga "$tga"
-    blit-tga-to-framebuffer "$tga"
+    blit-tga-to-framebuffer "$tga" "$fb"
 }
 
 generate-tga() {
@@ -26,7 +28,7 @@ generate-tga() {
 
 blit-tga-to-framebuffer() {
     local tga="$1"
-    local fb="${2:-/dev/fb0}"
+    local fb="$2"
 
     report "🗲 Blitting bitmap to framebuffer"
 
