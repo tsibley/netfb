@@ -40,7 +40,7 @@ contribution of mine.
 Yours truly,  
 Thomas
 
-P.S. There are those of you who will, quite justifiably, scoff at the notion
-that anything requiring ImageMagick be described as _minimal_.  This is a fair
-assessment for which my only defense is that I wanted you, dear Internet, to
-need not care about converting between image formats yourself.
+P.S. I expect you may, quite justifiably, scoff at the notion that anything
+requiring ImageMagick be described as _minimal_.  This is a fair assessment for
+which my only defense is that I wanted you, dear Internet, to need not care
+about converting between image formats yourself.
