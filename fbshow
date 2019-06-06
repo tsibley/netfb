@@ -52,7 +52,7 @@ generate-background() {
 }
 
 report() {
-    echo "$@"
+    echo "$@" >&2
 }
 
 main "$@"
