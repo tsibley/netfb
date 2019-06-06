@@ -15,7 +15,9 @@ install:
 	@install -cv $(progs) $(bin)
 	@install -dv $(systemd)
 	@install -cv $(units) $(systemd)
-	systemctl --user enable --now netfb.socket
+	systemctl --user daemon-reload
+	systemctl --user enable netfb.socket
+	systemctl --user start netfb.socket
 
 uninstall:
 	@rm -v $(installed_progs) $(installed_units) \
