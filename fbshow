@@ -7,55 +7,17 @@ set -euo pipefail
 main() {
     local fb="${1:-/dev/fb0}"
 
-    # It's much faster to write the image to disk between steps.
-    tga="$(mktemp)"
-    trap 'rm "$tga"' EXIT
-
-    generate-tga "$tga"
-    blit-tga-to-framebuffer "$tga" "$fb"
-}
-
-generate-tga() {
-    local tga="$1"
     report "🖼 Generating bitmap"
-    composite \
+    convert \
+        \( -size "$SCREEN_GEOMETRY" canvas:"$BACKGROUND_COLOR" \) \
+        \( - -scale "$SCREEN_GEOMETRY>" -auto-orient \) \
         -gravity center \
+        -compose copy \
+        -composite \
         -alpha opaque \
-        <(convert-input) \
-        <(generate-background) \
-        tga:"$tga"
+        -depth 8 \
+        bgra:"$fb"
     report "🖼 done in ${SECONDS}s"
-}
-
-blit-tga-to-framebuffer() {
-    local tga="$1"
-    local fb="$2"
-
-    report "🗲 Blitting bitmap to framebuffer"
-
-    # The .tga files produced by our ImageMagick pipeline have an 18 byte
-    # header before the image data which can be written directly to the
-    # framebuffer.
-    dd if="$tga" iflag=skip_bytes skip=18 of="$fb" status=none
-}
-
-convert-input() {
-    report " 📐 Resizing and rotating image"
-
-    # XXX TODO: explain -flip!
-    convert - \
-        -auto-orient \
-        -geometry "$SCREEN_GEOMETRY>" \
-        -flip \
-        png:-
-
-    report " 📐 done in ${SECONDS}s"
-}
-
-generate-background() {
-    report " 🖾 Measuring and cutting a $BACKGROUND_COLOR matte"
-    convert -size "$SCREEN_GEOMETRY" canvas:"$BACKGROUND_COLOR" png:-
-    report " 🖾 done in ${SECONDS}s"
 }
 
 report() {
