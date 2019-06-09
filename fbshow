@@ -1,16 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
-: ${SCREEN_GEOMETRY:=$(fbset --info | perl -anle 'print "$F[1]x$F[2]" and last if /geometry/')}
 : ${BACKGROUND_COLOR:=black}
 
 main() {
     local fb="${1:-/dev/fb0}"
+    local geometry="$(fbset -fb "$fb" --info | perl -anle 'print "$F[1]x$F[2]" and last if /geometry/')"
 
     report "🖼 Generating bitmap"
     convert \
-        \( -size "$SCREEN_GEOMETRY" canvas:"$BACKGROUND_COLOR" \) \
-        \( - -scale "$SCREEN_GEOMETRY>" -auto-orient \) \
+        \( -size "$geometry" canvas:"$BACKGROUND_COLOR" \) \
+        \( - -scale "$geometry>" -auto-orient \) \
         -gravity center \
         -compose copy \
         -composite \
