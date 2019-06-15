@@ -9,8 +9,8 @@ your choice (by default a respectable black), and rendered to an attached
 framebuffer device.
 
 It was my pleasure to assemble these bytes with thrift and economy.  They
-require only fbset, ImageMagick, and standard Unix utilities like bash, Perl,
-and dd.  Once you have arranged with your package manager for these to be
+require only fbset, ImageMagick, and standard Unix utilities like bash and
+Perl.  Once you have arranged with your package manager for these to be
 available, you may install netfb itself by issuing the following from a clone
 of the git repository:
 
