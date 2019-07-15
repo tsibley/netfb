@@ -21,7 +21,9 @@ main() {
 }
 
 report() {
-    echo "$@" >&2
+    if [[ -t 0 ]]; then
+        echo "$@" >&2
+    fi
 }
 
 main "$@"
