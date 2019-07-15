@@ -14,7 +14,7 @@ install:
 	@install -dv $(bin)
 	@install -cv $(progs) $(bin)
 	@install -dv $(systemd)
-	@install -cv $(units) $(systemd)
+	@install -cvm u=rw,go=r $(units) $(systemd)
 	systemctl --user daemon-reload
 	systemctl --user enable netfb.socket
 	systemctl --user start netfb.socket
