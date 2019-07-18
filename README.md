@@ -4,8 +4,8 @@ I write to you on the chance you might find useful this modest piece of
 software, which I with all due seriousness named __netfb__.
 
 netfb is a network service which listens on port 11235 for image data.  Images
-it receives are appropriated converted and resized, composed against a matte of
-your choice (by default a respectable black), and rendered to an attached
+it receives are appropriately converted and resized, composed against a matte
+of your choice (by default a respectable black), and rendered to an attached
 framebuffer device.
 
 It was my pleasure to assemble these bytes with thrift and economy.  They
